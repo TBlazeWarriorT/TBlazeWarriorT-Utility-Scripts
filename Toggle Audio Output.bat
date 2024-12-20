@@ -1,0 +1,1 @@
+powershell -ExecutionPolicy Bypass -File "F:\Files HD\_Documents\Toggle Audio Output.ps1"
