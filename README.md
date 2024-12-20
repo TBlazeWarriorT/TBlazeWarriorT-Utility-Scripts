@@ -7,3 +7,5 @@ This shortcut + bat file + powershell script bundle will run a ps script that ca
 3. Make sure the .ps1 script matches your device names. By default, it will look for (and require) a device with Speakers on the name (e.g. "Speakers (Realtek(R) Audio)" is valid) and one with Headset on the name.
 Either rename your device to that, or change the variable in the script.
 4. Pin the script to your taskbar and click
+
+![image](https://github.com/user-attachments/assets/64c25728-ba27-4d47-a88f-5d9e3c946062)
