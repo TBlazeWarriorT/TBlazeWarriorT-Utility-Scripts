@@ -13,3 +13,5 @@ They were made for myself and focus on Windows, but will include documentation t
 [Shortcut to Symlink](https://github.com/TBlazeWarriorT/TBlazeWarriorT-Utility-Scripts/tree/main/Shortcut%20to%20Symlink) - Easily creates a Symlink using just a .lnk shortcut
 
 [Windows Audio Output Toggler](https://github.com/TBlazeWarriorT/TBlazeWarriorT-Utility-Scripts/tree/main/Windows%20Audio%20Output%20Toggler) - Changes windows audio output in one click
+
+<a href='https://ko-fi.com/Q5Q1IZ1W' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
