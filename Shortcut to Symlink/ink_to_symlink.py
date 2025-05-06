@@ -98,7 +98,7 @@ def _delete_shortcut(path):
 	if os.name == 'nt':
 		try:
 			send2trash(path)
-			print(Fore.GREEN + f"Moved shortcut '{lnk_filename}' to Recycle Bin." + Style.RESET_ALL)
+			print(Fore.GREEN + f"Moved to Recycle Bin." + Style.RESET_ALL)
 		except OSError as e:
 			print(Fore.RED + f"Error moving shortcut to Recycle Bin: {e}" + Style.RESET_ALL)
 	elif os.name == 'posix':
