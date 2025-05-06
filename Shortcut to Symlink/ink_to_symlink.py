@@ -3,6 +3,7 @@ import os
 import subprocess
 from pylnk3 import parse
 from colorama import Fore, Style, init
+from send2trash import send2trash
 
 # Initialize colorama for Windows compatibility
 init(autoreset=True)
@@ -91,8 +92,6 @@ def _create_symlink(target, link):
 	else:
 		print(Fore.YELLOW + "Warning: Operating system not fully supported." + Style.RESET_ALL)
 		return False
-
-from send2trash import send2trash
 
 def _delete_shortcut(path):
 	lnk_filename = os.path.basename(path)
