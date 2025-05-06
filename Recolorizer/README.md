@@ -1,4 +1,4 @@
-Image Color (Palette) Remapping Script
+# Image Color (Palette) Remapping Script
 
 Functionality:
 This script replaces specific colors on images with new ones, using old and new color palette files, with bulk compatibility and safety features.
