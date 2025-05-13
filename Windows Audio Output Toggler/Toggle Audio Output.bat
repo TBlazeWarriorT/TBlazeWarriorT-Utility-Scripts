@@ -1,1 +1,1 @@
-powershell -ExecutionPolicy Bypass -WindowStyle hidden -File "F:\Files HD\_Documents\Toggle Audio Output.ps1"
+powershell -ExecutionPolicy Bypass -WindowStyle hidden -File "./Toggle Audio Output.ps1"
