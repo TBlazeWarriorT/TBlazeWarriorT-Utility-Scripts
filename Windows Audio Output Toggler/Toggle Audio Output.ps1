@@ -1,25 +1,37 @@
 # Define device keywords (adjust to match your system)
 $device1 = "Headset"
 $device2 = "Speakers"
-
-# Create or update the shortcut in a pinnable way
-$WshShell = New-Object -ComObject WScript.Shell
-$shortcutPath = Join-Path $PSScriptRoot 'Toggle Audio Output.lnk'
-$shortcut = $WshShell.CreateShortcut($shortcutPath)
-# Use powershell.exe directly (needed for pinning)
-$shortcut.TargetPath = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
-$shortcut.Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$PSScriptRoot\Toggle Audio Output.ps1`""
-# Set characteristics
-$shortcut.IconLocation = "shell32.dll,168"
-$shortcut.WindowStyle = 7
-$shortcut.Hotkey = "CTRL+ALT+A"
-$shortcut.WorkingDirectory = "C:\"
-$shortcut.Description = "Toggle Audio Output"
-$shortcut.Save()
+# To run this script (open cmd on this directory):
+# powershell -ExecutionPolicy Bypass -File "./Toggle Audio Output.ps1"
 
 # Get current playback audio device
 $CurrentAudio = Get-AudioDevice -Playback
 $CurrentDeviceName = $CurrentAudio.Name
+
+# Create or update the shortcut in a pinnable way
+function Update-AudioToggleShortcut {
+  $WshShell = New-Object -ComObject WScript.Shell
+  $shortcutPath = Join-Path $PSScriptRoot 'Toggle Audio Output.lnk'
+  # If it already exists, don't override icon and hotkey
+  if (Test-Path $shortcutPath) {
+    $shortcut = $WshShell.CreateShortcut($shortcutPath)
+  } else {
+    $shortcut = $WshShell.CreateShortcut($shortcutPath)
+    $shortcut.IconLocation = "shell32.dll,168" # Speakers icon
+    $shortcut.Hotkey = "CTRL+SHIFT+A" # Default hotkey
+  }
+  # Use powershell.exe directly (needed for pinning)
+  $shortcut.TargetPath = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
+  $shortcut.Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$PSScriptRoot\Toggle Audio Output.ps1`""
+  # Set characteristics
+  $shortcut.WindowStyle = 7 # Minimized
+  $shortcut.WorkingDirectory = "C:\"
+  $shortcut.Description = "Toggle Audio Output"
+  $shortcut.Save()
+  # Get current playback audio device
+  $CurrentAudio = Get-AudioDevice -Playback
+  $CurrentDeviceName = $CurrentAudio.Name
+}
 
 # Function to switch audio device based on keyword
 function Set-AudioDeviceByKeyword {
@@ -54,5 +66,7 @@ function Set-AudioDeviceByKeyword {
   Write-Output "Audio device switched successfully."
 }
 
+# Call function to create or update the shortcut
+Update-AudioToggleShortcut
 # Call function to switch device
 Set-AudioDeviceByKeyword -ActiveDeviceKeyword $device1 -InactiveDeviceKeyword $device2
