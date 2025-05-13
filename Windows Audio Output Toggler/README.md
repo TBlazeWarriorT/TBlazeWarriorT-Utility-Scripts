@@ -1,4 +1,4 @@
-# PowershellAudioOutputToggler
+# Powershell Audio Output Device Toggler
 This powershell script will switch between two pre-defined audio output devices in your computer.
 It also automatically generates a shortcut that runs it and can be pinned to your taskbar.
 # Setup
