@@ -2,10 +2,23 @@
 $device1 = "Headset"
 $device2 = "Speakers"
 
+# Create or update the shortcut in a pinnable way
+$WshShell = New-Object -ComObject WScript.Shell
+$shortcutPath = Join-Path $PSScriptRoot 'Toggle Audio Output.lnk'
+$shortcut = $WshShell.CreateShortcut($shortcutPath)
+# Use powershell.exe directly (needed for pinning)
+$shortcut.TargetPath = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
+$shortcut.Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$PSScriptRoot\Toggle Audio Output.ps1`""
+# Set characteristics
+$shortcut.IconLocation = "shell32.dll,168"
+$shortcut.WindowStyle = 7
+$shortcut.Hotkey = "CTRL+ALT+A"
+$shortcut.WorkingDirectory = "C:\"
+$shortcut.Description = "Toggle Audio Output"
+$shortcut.Save()
+
 # Get current playback audio device
 $CurrentAudio = Get-AudioDevice -Playback
-
-# Get current device name
 $CurrentDeviceName = $CurrentAudio.Name
 
 # Function to switch audio device based on keyword
