@@ -1,7 +1,7 @@
 # TBlazeWarriorT Utility Scripts
 Here you can find some of the scripts I've made for myself to perform various daily tasks.
 
-They were made for myself and focus on Windows, but will include documentation to be useful to other people and may include partial support to other OS's.
+They were made for myself and focus on Windows 10, but will include documentation to be useful to other people and may include partial support to other OS's.
 
 ## Summary
 [BatchVideoToMP3](https://github.com/TBlazeWarriorT/TBlazeWarriorT-Utility-Scripts/tree/main/BatchVideoToMP3) - Batch converts a folder with videos to MP3
