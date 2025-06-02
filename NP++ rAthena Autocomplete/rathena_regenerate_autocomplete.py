@@ -104,51 +104,53 @@ def parse_script_commands(lines):
 # --- Global Functions Parser ---
 def parse_global_functions(lines):
 	entries = []
-	last_desc = None
+	description_block = []
+	desc_mode = False  # True = capturing, False = not capturing
 	i = 0
 	while i < len(lines):
-		line = lines[i]
-		if line.startswith("///"):
-			# Capture description block
-			desc_lines = []
-			j = i + 1
-			while j < len(lines):
-				textline = lines[j].strip()
-				if not textline.startswith("//"):
-					break
-				if textline.startswith("// --") or textline.startswith("// callfunc") or "Examples" in textline:
-					break
-				txt = textline[2:].strip()
-				if is_meaningful_line(txt):
-					desc_lines.append(txt)
-				if len(desc_lines) == 4:
-					if j + 1 < len(lines) and is_meaningful_line(lines[j + 1]):
-						desc_lines[-1] += " [...]"
-					break
-				j += 1
-			last_desc = desc_lines
-			i = j
-			continue
-
-		# Look for any function definition
+		line = lines[i].rstrip()
+		# --- Always check for function first ---
 		func_match = re.match(r'^function	script	([^	]+)	\{', line)
 		if func_match:
-			name = func_match.group(1)
+			func_name = func_match.group(1)
 			global PRINT_FUNCTIONS
-			PRINT_FUNCTIONS += name + "()\n"
-			# Determine return type
-			retVal = "Global Function" if name.startswith("F_") else "*"
-			# Build description if available
-			description = ""
-			if last_desc:
-				description = escape_xml("\n" + "\n".join(last_desc))
-			entries.append((name.lower(), f'''\
-		<KeyWord name="{name}" func="yes">
+			PRINT_FUNCTIONS += func_name + "()\n"
+			desc_mode = 0  # always turn off desc capture when hitting function
+			retVal = "Global_Function" if func_name.startswith("F_") else "*"
+			description = escape_xml("\n" + "\n".join(description_block)) if description_block else ""
+			entries.append((func_name.lower(), f'''\
+		<KeyWord name="{func_name}" func="yes">
 			<Overload retVal="{retVal}" descr="{description}">
 				<Param name="" />
 			</Overload>
 		</KeyWord>'''))
-		# Continue scanning
+			i += 1
+			continue
+
+		# --- Toggle capture mode on bar line ---
+		if re.match(r'^/{5,}', line):
+			desc_mode = not desc_mode
+			if desc_mode:
+				description_block = []
+			i += 1
+			continue
+
+		# --- When actively capturing description (mode 2) ---
+		if desc_mode and line.strip().startswith("//"):
+			stripped = line.strip()
+			if "callfunc" in stripped or "Example" in stripped:
+				i += 1
+				continue
+			text = stripped[2:].strip()
+			if is_meaningful_line(text):
+				if len(description_block) < 4: description_block.append(text)
+				if len(description_block) == 4:
+					if i + 1 < len(lines) and is_meaningful_line(lines[i + 1]):
+						description_block[-1] += " [...]"
+					desc_mode = 1
+				i += 1
+				continue
+
 		i += 1
 	return entries
 
@@ -190,7 +192,7 @@ xml_output = '''<?xml version="1.0" encoding="Windows-1252" ?>
 	<AutoComplete language="rAthena">
 		<Environment ignoreCase="no" startFunc="(" stopFunc=")" paramSeparator="," terminal=";" />
 '''
-xml_output += "\n".join(e[1] for e in sorted(script_entries + global_entries, key=lambda x: x[0]))
+xml_output += "\n".join(e[1] for e in script_entries + global_entries)
 xml_output += constant_entries
 xml_output += '''
 	</AutoComplete>
