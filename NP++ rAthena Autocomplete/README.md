@@ -24,4 +24,4 @@ I'm lazy to make a proper importer rn, and the file might not be final.
   - **3.1**. Enable rAthena language on a file. Make sure auto-complete stuff are enabled in settings. Start typing. To see hints, you'll need to open parenthesis '(', and can press CTRL+SHIFT+SPACE by default to force the tooltip to reopen.  
 
 ### Updating autocomplete to latest rAthena (optional):
-- 1. Download and run the Python script.
+- **1**. Download and run the Python script.
