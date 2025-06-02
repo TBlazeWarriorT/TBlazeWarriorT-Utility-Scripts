@@ -1,6 +1,7 @@
 # rAthena Notepad++ Auto-complete
 
 ### Functionality:
+- **TL;DR**: This includes a very powerful auto-complete that can be auto-updated, that depends on a partially included User Defined Language.
 - **A**) Included .xml file: just install below and you'll get autocomplete.
 It includes all script_commands and global functions with documentation (if available), and script_constants without documentation.
 ![image](https://github.com/user-attachments/assets/c660a6b9-0daa-4743-b4fd-0633b96836ea)
