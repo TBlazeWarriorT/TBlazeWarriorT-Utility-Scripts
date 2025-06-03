@@ -22,7 +22,7 @@ The auto-completion file can be automatically updated by simply running a script
 - **Step 4 (using it)**: Enable rAthena language on a file. Make sure auto-complete stuff are enabled in settings. Start typing. To see hints, you'll need to open parenthesis '(', and can press CTRL+SHIFT+SPACE by default to force the tooltip to reopen.  
 
 ### Updating autocomplete to latest rAthena (optional):
-- **Step 1 (C)**: Download and run the Python script.  
+- **Step 1 (C)**: Download and run the Python script. Install the new file by replacing the old one.  
   - It re-generates the XML file based on the latest main branch of the rAthena GitHub. May fetch and cache new data every 10 mins.
 
 ### Personal Tip:
