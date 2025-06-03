@@ -26,9 +26,9 @@ The auto-completion file can be automatically updated by simply running a script
   - It re-generates the XML file based on the latest main branch of the rAthena GitHub. May fetch and cache new data every 10 mins.
 
 ### Personal Tip:
-You can use .cpp files for scripts instead of .txt, for example. Or you could call them .rat files, I guess.
-If you do so, it's easier to spot rAthena files, and to set defaults on your text editor for them. This can help prevent encoding issues too.
-If you do, you can go to `Language > User Defined Language > Define your language... > rAthena > Ext.:` and add `cpp rat` to that list or whatever you want.
+You can use .cpp files for scripts instead of .txt, for example. Or you could call them .rat files, I guess.  
+If you do so, it's easier to spot rAthena files, and to set defaults on your text editor for them. This can help prevent encoding issues too.  
+If you do, you can go to `Language > User Defined Language > Define your language... > rAthena > Ext.:` and add `cpp rat` to that list or whatever you want.  
 
 ### Credits:
 The included Syntax Highlighting file is a heavily modified version of [Sehrentos' rAthena Syntax Highlight](https://github.com/Sehrentos/rAthena-syntax-highlight/tree/master)
