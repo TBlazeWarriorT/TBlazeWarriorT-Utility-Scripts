@@ -64,6 +64,9 @@ function Set-AudioDeviceByKeyword {
 
   # Write success message
   Write-Output "Audio device switched successfully."
+  [Console]::Beep(300, 100)
+  Start-Sleep -Milliseconds 40
+  [Console]::Beep(400, 100)
 }
 
 # Call function to create or update the shortcut
